@@ -21,6 +21,6 @@ public class Homework07 {
             }
         }
 
-        System.out.println("The Biggest Number with MinCount " + Number);
+        System.out.format("The Biggest Number with MinCount %d",Number);
     }
 }
