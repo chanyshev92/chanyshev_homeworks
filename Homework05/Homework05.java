@@ -17,9 +17,8 @@ public class Homework05 {
 			a=scanner.nextInt();
 			
 		}
-		
-        System.out.println("Mindigit: "+min);
-		
+		System.out.format("Mindigit: %d",min);
+        
     }
 	
 }
