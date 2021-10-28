@@ -6,9 +6,11 @@ public class Main {
 
     //процедура инициализации массива людей
     public static void initializeHumans(Human[] humans){
+
+        Scanner scanner = new Scanner(System.in);
+
         for (int i = 0; i < humans.length; i++) {
 
-            Scanner scanner = new Scanner(System.in);
             humans[i] = new Human();
             humans[i].setName("User" + i);
             System.out.format("Write Weight for User%d ",i);
