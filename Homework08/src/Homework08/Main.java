@@ -1,5 +1,7 @@
 package Homework08;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 public class Main {
@@ -33,10 +35,10 @@ public class Main {
     }
 
     //процедура вставки значений полей одного человека в поля другого
-    public static void insert(Human humans,Human Zombies){
+    public static void insert(Human humans,Human zombies){
 
-        humans.setName(Zombies.getName());
-        humans.setWeight(Zombies.getWeight());
+        humans.setName(zombies.getName());
+        humans.setWeight(zombies.getWeight());
     }
 
     //процедура обмена одного элемента массива людей на другого
