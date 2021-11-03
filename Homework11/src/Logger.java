@@ -1,24 +1,30 @@
+import java.util.Objects;
 
 public class Logger {
 
     private static final Logger instance;
-    static{
+
+    static {
+
         instance = new Logger();
-    }
-
-    private Logger(){
 
     }
-    public static Logger getInstance(){
+
+    private Logger() {
+
+    }
+
+    public static Logger getInstance() {
 
         return instance;
+
     }
 
+    public void log(String message) {
 
-
-    public void log (String message){
-        if (message != "") { System.out.println(message);
-        }else System.out.println("Сообщение пустое");
+        if (!Objects.equals(message, "")) {
+            System.out.println(message);
+        } else System.out.println("Сообщение пустое");
 
     }
 
