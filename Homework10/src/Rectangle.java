@@ -1,14 +1,14 @@
-public class Rectangle extends Figure{
-    public Rectangle(int x,int y, int a, int b) {
+public class Rectangle extends Figure {
+    public Rectangle(int x, int y, int a, int b) {
 
         setX(x);
         setY(y);
-        this.a = a;
-        this.b = b;
-        this.rad1 = 0;
-        this.rad2 = 0;
-        setFigureMover(figureMover=null);
-        name="Rectangle";
+        setA(a);
+        setB(b);
+        setRad1(0);
+        setRad2(0);
+        setFigureMover(null);
+        setName("Rectangle");
 
     }
 }

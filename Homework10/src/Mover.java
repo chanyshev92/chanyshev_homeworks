@@ -1,5 +1,4 @@
 public interface Mover {
-        //интерфейс перемещение
-        int newX();
-        int newY();
+
+        void destination(int x, int y);
 }
