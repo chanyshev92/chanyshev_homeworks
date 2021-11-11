@@ -1,6 +1,8 @@
 public class Main {
     public static void main(String[] args) {
 
+        System.out.println("1ая часть");
+
         ArrayList<Integer> numbers = new ArrayList<>();
 
         numbers.add(33);
@@ -35,6 +37,34 @@ public class Main {
         numbers.clear();
         numbers.add(5);
         numbers.print();
+
+        System.out.println("2ая часть");
+
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(34);
+        list.add(120);
+        list.add(-10);
+        list.add(11);
+        list.add(50);
+        list.add(100);
+        list.add(99);
+
+        list.print();
+
+        System.out.println("Элемент с индексом 7 текущего списка");
+        System.out.println(" "+list.get(7));
+
+        list.addToBegin(77);
+        list.addToBegin(88);
+        list.addToBegin(99);
+
+        list.print();
+
+        System.out.println("Элемент с индексом 7 текущего списка");
+        System.out.println(" "+list.get(7));
+
+
+
 
     }
 }
