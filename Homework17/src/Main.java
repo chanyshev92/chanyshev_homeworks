@@ -4,8 +4,7 @@ public class Main {
 
     public static String prepareString(String string){
 
-        string=string.toLowerCase();
-        string=string.replaceAll("[^a-zA-Zа-яА-Я0-9 ]", "");
+        string=string.toLowerCase().replaceAll("[^a-zA-Zа-яА-Я0-9 ]", "");
         return string;
 
     }
@@ -41,7 +40,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String string = "1. Длинная строка с #разными# словами, %строка% упоминается дважды. 2. С разными значениями";
+        String string = "1) Длинная строка с #разными# словами, %строка% упоминается дважды. 2) С разными значениями";
         System.out.println(string);
 
         string=prepareString(string);
