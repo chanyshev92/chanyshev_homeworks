@@ -21,11 +21,9 @@ public class Main {
         }
 
     }
-    public static void printingByMarsel(Map<String,Integer> map){
+    public static void printMap (Map<String,Integer> map){
 
-        Set<Map.Entry<String, Integer>> entries = map.entrySet();
-
-        for (Map.Entry<String, Integer> entry : entries) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
 
             System.out.println("Слово: " + entry.getKey() + ", Количество раз: " + entry.getValue());
 
@@ -38,13 +36,13 @@ public class Main {
         String string = "Длинная строка с разными словами строка упоминается дважды С разными значениями";
         System.out.println(string);
 
-        String[] strings = string.split(" ");
+        String[] words = string.split(" ");
         Map<String,Integer> map = new HashMap<>();
 
-        putStringsIntoMap(strings,map);
+        putStringsIntoMap(words,map);
 
         //System.out.println(map);
-        printingByMarsel(map);
+        printMap(map);
 
     }
 
