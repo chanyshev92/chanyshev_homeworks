@@ -2,6 +2,14 @@ import java.util.*;
 
 public class Main {
 
+    public static String prepareString(String string){
+
+        string=string.toLowerCase();
+        string=string.replaceAll("[^a-zA-Zа-яА-Я0-9 ]", "");
+        return string;
+
+    }
+
     public static void putStringsIntoMap(String[] words, Map<String, Integer> map) {
         for (String x: words) {
 
@@ -33,8 +41,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String string = "Длинная строка с разными словами строка упоминается дважды С разными значениями";
+        String string = "1. Длинная строка с #разными# словами, %строка% упоминается дважды. 2. С разными значениями";
         System.out.println(string);
+
+        string=prepareString(string);
 
         String[] words = string.split(" ");
         Map<String,Integer> map = new HashMap<>();
