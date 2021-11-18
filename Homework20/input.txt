@@ -1,7 +1,7 @@
 o010aa702|Camry|Black|1133|82000
 а002aa116|Camry|Green|3133|0
-o001aa716|Solaris|Black|1133|2000
-o001aa777|Vesta|Black|750|12000
-o001aa750|Vesta|Blue|800|11000
-o001aa778|Rio|Red|755|88000
-o001aa769|Solaris|Blue|566|120000
+н001aa716|Solaris|Black|1133|2000
+х551aa777|Vesta|Black|750|12000
+o001aс750|Vesta|Blue|780|11000
+р701aa778|Rio|Red|755|88000
+o881aa769|Solaris|Blue|566|120000

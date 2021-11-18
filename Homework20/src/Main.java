@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.OptionalDouble;
+
 
 public class Main {
 
@@ -14,19 +17,16 @@ public class Main {
 
             reader.lines()
 
-                    .filter(s -> {
-
-                        String[] strings = s.split("\\|");
-                        return strings[4].equals("0") || strings[2].equals("Black");
-
-                    })
-
                     .map(s -> {
 
                         String[] strings = s.split("\\|");
-                        return strings[0];
+                        return new Car(strings[0], strings[1], strings[2], Integer.parseInt(strings[3]), Integer.parseInt(strings[4]));
 
                     })
+
+                    .filter(car -> car.getMileage() == 0 || car.getColor().equals("Black"))
+
+                    .map(Car::getLicensePlate)
 
                     .forEach(System.out::println);
 
@@ -42,26 +42,27 @@ public class Main {
 
         try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
 
-            double averagePrice = reader.lines()
+            OptionalDouble averagePrice = reader.lines()
 
-                    .filter(s -> {
+                    .map(s -> {
 
                         String[] strings = s.split("\\|");
-                        return strings[1].equals("Camry");
+                        return new Car(strings[0], strings[1], strings[2], Integer.parseInt(strings[3]), Integer.parseInt(strings[4]));
 
                     })
 
-                    .mapToInt(s -> {
+                    .filter(car -> car.getModel().equals("Camry"))
 
-                        String[] strings = s.split("\\|");
-                        return Integer.parseInt(strings[3]);
+                    .mapToDouble(Car::getPrice)
 
-                    })
+                    .average();
 
-                    .average()
-                    .getAsDouble();
+            if (averagePrice.isPresent()) {
 
-            System.out.println("Средняя цена на Camry " + averagePrice);
+                System.out.println("Средняя цена на Camry " + averagePrice.getAsDouble());
+
+            }
+
 
         } catch (IOException e) {
 
@@ -70,31 +71,29 @@ public class Main {
         }
     }
 
-    //разные модели ценой 700-800 тыс.
-    public static void differentModelsWithPriceFrom700To800() {
-
-        System.out.println("Разные модели ценой 700-800 тыс.:");
+    //количество разных моделей ценой 700-800 тыс.
+    public static void countOfDifferentModelsWithPriceFrom700To800() {
 
         try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
 
-            reader.lines()
-
-                    .filter(s -> {
-
-                        String[] strings = s.split("\\|");
-                        int price = Integer.parseInt(strings[3].trim());
-                        return price >= 700 && price <= 800;
-                    })
+            long count = reader.lines()
 
                     .map(s -> {
 
                         String[] strings = s.split("\\|");
-                        return strings[1];
+                        return new Car(strings[0], strings[1], strings[2], Integer.parseInt(strings[3]), Integer.parseInt(strings[4]));
 
                     })
 
+                    .filter(car -> car.getPrice() >= 700 && car.getPrice() <= 800)
+
+                    .map(Car::getModel)
+
                     .distinct()
-                    .forEach(System.out::println);
+
+                    .count();
+
+            System.out.println("Количество разных моделей ценой 700-800 тыс. - " + count);
 
         } catch (IOException e) {
 
@@ -105,31 +104,27 @@ public class Main {
 
     //Цвет машины с минимальной ценой
     public static void colorOfCarWithMinPrice() {
+
         try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
 
             String colorOfCarWithMinPrice = reader.lines()
 
-                    .min((s1, s2) -> {
-
-                        String[] strings1 = s1.split("\\|");
-                        String[] strings2 = s2.split("\\|");
-                        int price1 = Integer.parseInt(strings1[3].trim());
-                        int price2 = Integer.parseInt(strings2[3].trim());
-                        return Integer.compare(price1, price2);
-
-                    })
-
                     .map(s -> {
 
                         String[] strings = s.split("\\|");
-                        return strings[2];
+                        return new Car(strings[0], strings[1], strings[2], Integer.parseInt(strings[3]), Integer.parseInt(strings[4]));
 
                     })
+
+
+                    .min(Comparator.comparingInt(Car::getPrice))
+
+                    .map(Car::getColor)
 
                     .map(Objects::toString)
                     .orElse("");
 
-            System.out.println("Цвет машины с минимальной ценой " + colorOfCarWithMinPrice);
+            System.out.println("Цвет машины с минимальной ценой - " + colorOfCarWithMinPrice);
 
         } catch (IOException e) {
 
@@ -144,7 +139,7 @@ public class Main {
         System.out.println();
         camryAveragePrice();
         System.out.println();
-        differentModelsWithPriceFrom700To800();
+        countOfDifferentModelsWithPriceFrom700To800();
         System.out.println();
         colorOfCarWithMinPrice();
 
