@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Main {
 
@@ -9,17 +10,22 @@ public class Main {
 
         try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
 
-            reader.lines().filter(s -> {
+            reader.lines()
+
+                    .filter(s -> {
 
                         String[] strings = s.split("\\|");
                         return strings[4].equals("0") || strings[2].equals("Black");
 
-                    }).map(s -> {
+                    })
+
+                    .map(s -> {
 
                         String[] strings = s.split("\\|");
                         return strings[0];
 
                     })
+
                     .forEach(System.out::println);
 
         } catch (IOException e) {
@@ -42,6 +48,7 @@ public class Main {
                         return strings[1].equals("Camry");
 
                     })
+
                     .mapToInt(s -> {
 
                         String[] strings = s.split("\\|");
@@ -67,6 +74,7 @@ public class Main {
         try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
 
             reader.lines()
+
                     .filter(s -> {
 
                         String[] strings = s.split("\\|");
@@ -91,11 +99,47 @@ public class Main {
         }
     }
 
+    //Цвет машины с минимальной ценой
+    public static void colorOfCarWithMinPrice() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
+
+            String colorOfCarWithMinPrice = reader.lines()
+
+                    .min((s1, s2) -> {
+
+                        String[] strings1 = s1.split("\\|");
+                        String[] strings2 = s2.split("\\|");
+                        int price1 = Integer.parseInt(strings1[3].trim());
+                        int price2 = Integer.parseInt(strings2[3].trim());
+                        return Integer.compare(price1, price2);
+
+                    })
+
+                    .map(s -> {
+
+                        String[] strings = s.split("\\|");
+                        return strings[2];
+
+                    })
+
+                    .map(Objects::toString)
+                    .orElse("");
+
+            System.out.println("Цвет машины с минимальной ценой " + colorOfCarWithMinPrice);
+
+        } catch (IOException e) {
+
+            throw new IllegalArgumentException(e);
+
+        }
+    }
+
     public static void main(String[] args) {
 
         licensePlatesOfBlackOrNewCars();
         camryAveragePrice();
         differentModelsWithPriceFrom700To800();
+        colorOfCarWithMinPrice();
 
     }
 }
