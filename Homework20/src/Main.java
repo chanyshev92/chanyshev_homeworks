@@ -8,6 +8,8 @@ public class Main {
     //номера черных или с нулевым пробегом
     public static void licensePlatesOfBlackOrNewCars() {
 
+        System.out.println("Номера черных машин или машин с нулевым пробегом");
+
         try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
 
             reader.lines()
@@ -59,7 +61,7 @@ public class Main {
                     .average()
                     .getAsDouble();
 
-            System.out.println("Средняя цена на Camry" + averagePrice);
+            System.out.println("Средняя цена на Camry " + averagePrice);
 
         } catch (IOException e) {
 
@@ -70,6 +72,8 @@ public class Main {
 
     //разные модели ценой 700-800 тыс.
     public static void differentModelsWithPriceFrom700To800() {
+
+        System.out.println("Разные модели ценой 700-800 тыс.:");
 
         try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
 
@@ -137,8 +141,11 @@ public class Main {
     public static void main(String[] args) {
 
         licensePlatesOfBlackOrNewCars();
+        System.out.println();
         camryAveragePrice();
+        System.out.println();
         differentModelsWithPriceFrom700To800();
+        System.out.println();
         colorOfCarWithMinPrice();
 
     }
