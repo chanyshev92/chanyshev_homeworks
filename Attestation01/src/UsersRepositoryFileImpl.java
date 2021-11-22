@@ -17,7 +17,7 @@ public class UsersRepositoryFileImpl implements UserRepository {
 
         List<User> users = new ArrayList<>();
 
-        try (Reader reader = new FileReader(fileName); BufferedReader bufferedReader = new BufferedReader(reader)) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
 
             String line = bufferedReader.readLine();
 
@@ -25,17 +25,7 @@ public class UsersRepositoryFileImpl implements UserRepository {
 
                 String[] parts = line.split("\\|");
 
-                int id = Integer.parseInt(parts[0]);
-
-                String name = parts[1];
-
-                int age = Integer.parseInt(parts[2]);
-
-                boolean isWorker = Boolean.parseBoolean(parts[3]);
-
-                User newUser = new User(id, name, age, isWorker);
-
-                users.add(newUser);
+                users.add(new User(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]), Boolean.parseBoolean(parts[3])));
 
                 line = bufferedReader.readLine();
             }
@@ -49,7 +39,7 @@ public class UsersRepositoryFileImpl implements UserRepository {
     @Override
     public void save(User user) {
 
-        try (Writer writer = new FileWriter(fileName, true); BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
 
 
             if (findAll().stream().map(User::getId).noneMatch(id -> id == user.getId())) {
@@ -57,8 +47,11 @@ public class UsersRepositoryFileImpl implements UserRepository {
                 bufferedWriter.write(user.getId() + "|" + user.getName() + "|" + user.getAge() + "|" + user.isWorker());
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
+
             } else {
+
                 System.out.println("повторяющийся id");
+                //int max=findAll().stream().mapToInt(user1->user1.getId()).max().orElse(0);
             }
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
@@ -95,7 +88,7 @@ public class UsersRepositoryFileImpl implements UserRepository {
 
                 throw new IllegalArgumentException(e);
             }
-            //сохраняем пользователей в файл предварительно отсортировав по id
+            //перезаписываем пользователей в файл предварительно отсортировав по id
             users.stream().sorted(Comparator.comparingInt(User::getId)).forEach(this::save);
         }
 
