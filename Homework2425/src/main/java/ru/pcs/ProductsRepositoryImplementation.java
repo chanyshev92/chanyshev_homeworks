@@ -24,7 +24,6 @@ public class ProductsRepositoryImplementation implements ProductsRepository {
             new Product(rs.getInt("id"), rs.getString("description"), rs.getInt("price"), rs.getInt("amount")));
 
 
-
     @Override
     public void save(Product product) {
 
@@ -39,12 +38,12 @@ public class ProductsRepositoryImplementation implements ProductsRepository {
     @Override
     public List<Product> findAllByPrice(double price) {
 
-        return findAll().stream().filter(product -> product.getPrice()==price).collect(Collectors.toList());
+        return findAll().stream().filter(product -> product.getPrice() == price).collect(Collectors.toList());
     }
 
     @Override
     public List<Product> findAllByOrdersCount(int ordersCount) {
         //language=SQL
-        return jdbcTemplate.query("SELECT * FROM product WHERE id in (SELECT product_id FROM booking WHERE amount="+ordersCount+")",productRowMapper);
+        return jdbcTemplate.query("SELECT * FROM product WHERE id in (SELECT product_id FROM booking WHERE amount=" + ordersCount + ")", productRowMapper);
     }
 }

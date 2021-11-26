@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 public class Main {
     public static void main(String[] args) {
 
-        DataSource dataSource =new DriverManagerDataSource("jdbc:postgresql://localhost:5432/pcs","postgres","qwertyui");
+        DataSource dataSource = new DriverManagerDataSource("jdbc:postgresql://localhost:5432/pcs", "postgres", "qwertyui");
 
         ProductsRepository productsRepository = new ProductsRepositoryImplementation(dataSource);
         System.out.println(productsRepository.findAll());
