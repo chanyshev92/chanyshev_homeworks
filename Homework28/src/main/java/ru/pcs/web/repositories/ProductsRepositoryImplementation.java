@@ -17,7 +17,13 @@ public class ProductsRepositoryImplementation implements ProductsRepository {
     //language=SQL
     private static final String SQL_SELECT_ALL = "select * from product order by id";
 
-    JdbcTemplate jdbcTemplate;
+    //language=SQL
+    private static final String SQL_DELETE_BY_ID = "delete from product where id=?";
+
+    //language=SQL
+    private static final String SQL_SELECT_BY_ID = "select * from product where id=?";
+
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public ProductsRepositoryImplementation(DataSource dataSource) {
@@ -49,5 +55,15 @@ public class ProductsRepositoryImplementation implements ProductsRepository {
     public List<Product> findAllByOrdersCount(int ordersCount) {
         //language=SQL
         return jdbcTemplate.query("SELECT * FROM product WHERE id in (SELECT product_id FROM booking WHERE amount= ?)", productRowMapper, ordersCount);
+    }
+
+    @Override
+    public void delete(Long productId) {
+        jdbcTemplate.update(SQL_DELETE_BY_ID,productId);
+    }
+
+    @Override
+    public Product findByInProduct(Long productId) {
+        return jdbcTemplate.queryForObject(SQL_SELECT_BY_ID,productRowMapper,productId);
     }
 }

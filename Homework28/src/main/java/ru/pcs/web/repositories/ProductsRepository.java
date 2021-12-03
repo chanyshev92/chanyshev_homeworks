@@ -13,4 +13,7 @@ public interface ProductsRepository {
     List<Product> findAllByPrice(double price);
 
     List<Product> findAllByOrdersCount(int ordersCount);
+    void delete(Long productId);
+
+    Product findByInProduct(Long productId);
 }
