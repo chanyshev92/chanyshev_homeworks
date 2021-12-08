@@ -45,4 +45,15 @@ public class ProductServiceImpl implements ProductService {
 
         return productsRepository.findByInProduct(productId);
     }
+
+    @Override
+    public void updateProduct(ProductForm form, Long productId) {
+
+        Product product = Product.builder()
+                .description(form.getDescription())
+                .price(form.getPrice())
+                .amount(form.getAmount())
+                .build();
+        productsRepository.update(product, productId);
+    }
 }

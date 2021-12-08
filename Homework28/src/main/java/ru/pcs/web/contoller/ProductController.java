@@ -6,10 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.pcs.web.forms.ProductForm;
 import ru.pcs.web.models.Product;
-import ru.pcs.web.repositories.ProductsRepository;
 import ru.pcs.web.services.ProductService;
 
 import java.util.List;
@@ -50,9 +48,9 @@ public class ProductController {
         productService.deleteProduct(productId);
         return "redirect:/product";
     }
-    @PostMapping("/product/{product-id}/update")
-    public String updateProduct(@PathVariable("product-id") Long productId){
-
+    @PostMapping("/one_product/{product-id}/update")
+    public String updateProduct(ProductForm form, @PathVariable("product-id") Long productId){
+        productService.updateProduct(form, productId);
         return "redirect:/one_product";
     }
 }

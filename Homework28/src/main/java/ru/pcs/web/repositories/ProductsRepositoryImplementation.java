@@ -23,6 +23,9 @@ public class ProductsRepositoryImplementation implements ProductsRepository {
     //language=SQL
     private static final String SQL_SELECT_BY_ID = "select * from product where id=?";
 
+    //language=SQL
+    private static final String SQL_UPDATE_BY_ID = "UPDATE product SET description=?,price=?,amount=? WHERE id=?";
+
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -65,5 +68,13 @@ public class ProductsRepositoryImplementation implements ProductsRepository {
     @Override
     public Product findByInProduct(Long productId) {
         return jdbcTemplate.queryForObject(SQL_SELECT_BY_ID,productRowMapper,productId);
+    }
+
+    @Override
+    public void update(Product product,Long productId) {
+        //jdbcTemplate.update(SQL_SELECT_BY_ID+SQL_INSERT,productId, product.getDescription(), product.getPrice(), product.getAmount());
+        jdbcTemplate.update(SQL_UPDATE_BY_ID, product.getDescription(), product.getPrice(), product.getAmount(),productId);
+
+
     }
 }

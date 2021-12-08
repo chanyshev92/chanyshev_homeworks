@@ -16,4 +16,6 @@ public interface ProductsRepository {
     void delete(Long productId);
 
     Product findByInProduct(Long productId);
+
+    void update(Product product,Long productId);
 }
