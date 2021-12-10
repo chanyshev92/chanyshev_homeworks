@@ -24,43 +24,44 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model){
+    public String getProductPage(Model model) {
         List<Product> products = productService.getAllProducts();
-        model.addAttribute("products",products);
+        model.addAttribute("products", products);
         return "products";
     }
 
     @GetMapping("/products/{product-id}")
-    public String getProductPage(Model model, @PathVariable("product-id") Integer productId){
+    public String getProductPage(Model model, @PathVariable("product-id") Integer productId) {
         Product product = productService.getProduct(productId);
-        model.addAttribute("product",product);
+        model.addAttribute("product", product);
         return "product";
     }
 
     @GetMapping("/products/{product-id}/bookings")
-    public String getBookingsByProduct(Model model,@PathVariable("product-id") Integer productId){
-        List<Booking> bookings =productService.getBookingsByProduct(productId);
-        List<Booking> bookingsWithoutProduct=productService.getBookingsWithoutProduct();
-        model.addAttribute("bookings",bookings);
-        model.addAttribute("bookingsWithoutProduct",bookingsWithoutProduct);
+    public String getBookingsByProduct(Model model, @PathVariable("product-id") Integer productId) {
+        List<Booking> bookings = productService.getBookingsByProduct(productId);
+        List<Booking> bookingsWithoutProduct = productService.getBookingsWithoutProduct();
+        model.addAttribute("bookings", bookings);
+        model.addAttribute("bookingsWithoutProduct", bookingsWithoutProduct);
         return "bookings_of_product";
     }
 
 
     @PostMapping("/products")
-    public String addProduct(ProductForm form){
+    public String addProduct(ProductForm form) {
         productService.addProduct(form);
         return "redirect:/products";
     }
 
     @PostMapping("/products/{product-id}/delete")
-    public String deleteProduct(@PathVariable("product-id") Integer productId){
+    public String deleteProduct(@PathVariable("product-id") Integer productId) {
         productService.deleteProduct(productId);
         return "redirect:/products";
     }
+
     @PostMapping("/products/{product-id}/update")
-    public String updateProduct(ProductForm form, @PathVariable("product-id") Integer productId){
+    public String updateProduct(ProductForm form, @PathVariable("product-id") Integer productId) {
         productService.updateProduct(form, productId);
-        return String.format("redirect:/products/%s",productId);
+        return String.format("redirect:/products/%s", productId);
     }
 }

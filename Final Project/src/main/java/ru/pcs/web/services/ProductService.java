@@ -8,13 +8,14 @@ import java.util.List;
 
 public interface ProductService {
     void addProduct(ProductForm form);
+
     List<Product> getAllProducts();
 
     void deleteProduct(Integer productId);
 
     Product getProduct(Integer productId);
 
-    void updateProduct( ProductForm form,Integer productId);
+    void updateProduct(ProductForm form, Integer productId);
 
     List<Booking> getBookingsByProduct(Integer productId);
 

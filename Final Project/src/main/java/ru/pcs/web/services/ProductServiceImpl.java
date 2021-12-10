@@ -1,7 +1,6 @@
 package ru.pcs.web.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pcs.web.forms.ProductForm;
 import ru.pcs.web.models.Booking;

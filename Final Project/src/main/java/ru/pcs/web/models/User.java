@@ -13,16 +13,24 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "customer")
+public class User {
+    public enum Role {
+        ADMIN, CUSTOMER
+    }
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String name;
 
-    private String description;
-    private Integer price;
-    private Integer amount;
+    @Column(unique = true)
+    private String email;
 
-    @OneToMany(mappedBy = "product")
+    private String hashPassword;
+
+    @OneToMany(mappedBy = "customer")
     private List<Booking> bookings;
 }
