@@ -9,4 +9,6 @@ public interface BookingsRepository extends JpaRepository<Booking, Integer> {
     List<Booking> findAllByProduct_Id(Integer id);
 
     List<Booking> findAllByProductIsNull();
+
+    List<Booking> findAllByCustomer_Id(Integer id);
 }

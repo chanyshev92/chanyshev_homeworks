@@ -28,12 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/products").authenticated()
-                .antMatchers("products/**").hasAuthority("ADMIN")
+                .antMatchers("/products/**").hasAuthority("ADMIN")
                 .antMatchers("/signUp").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/signIn")
-                .defaultSuccessUrl("/products")
+                .defaultSuccessUrl("/users")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll();
